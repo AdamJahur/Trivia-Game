@@ -1,0 +1,34 @@
+.jumbotron{
+	height: 750px;
+}
+#logo {
+	margin: 20px auto 0px auto;
+	z-index: inherit;
+	display: block;
+}
+#castImage{
+	width: 90%;
+	max-width: 833px;
+}
+.start {
+	margin-top: 20px;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16pt;
+	padding: 5px 10px;
+	font-weight: 700;
+	background-color: #e30922;
+	color: #fff;
+	z-index: 2000;
+	border-radius: 5px;
+}
+
+.start:hover {
+	background-color: #fcd720;
+	color: #000;
+}
+.containerBack {
+	border-radius: 25px;
+	border: 7px solid #e30922;
+	background-color: #fff;
+	min-height: 100%;
+}
