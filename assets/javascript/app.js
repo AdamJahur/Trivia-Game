@@ -1,4 +1,6 @@
-$(document).ready(function() {
+
+
+$( document ).ready(function() {
 
 //questions
 var quiz = [{
@@ -7,62 +9,73 @@ var quiz = [{
 	'choices' : ['Kyle', 'Cartman', 'Kenny', 'Stan'],
 	'correct' : 'Kenny',
 	'placeHolder' : 'assets/images/q1.png',
+	'answerInfo' : 'Kenny'
 	}, {
 	'questionNumber' : 2,
-	'question' : 'Who/s mom is a big, fat, stupid b*%#h according to Cartman?'
-	'choices' : ['Stan/s', 'Kyle/s', 'his own', 'Kenny/s'],
-	'correct' : 'Kyle/s',
+	'question' : 'Whos mom is a big, fat, stupid b*%#h according to Cartman?',
+	'choices' : ['Stan', 'Kyle', 'Kenny', 'his own'],
+	'correct' : 'Kyle',
 	'placeHolder' : 'assets/images/q2.png',
+	'answerInfo' : 'Kyle'
 	}, {
-	'questionNumber' : 3,
-	'question' : 'What cartoon is the gang/s favorite?',
+	'questionNumber' : 3,		
+	'question' : "What cartoon is the gangs favorite?",
 	'choices' : ['Tom and Jerry', 'Itchy and Scratchy', 'Terrance and Phillip', 'The Simpsons'],
-	'correct' : 'Terrance and Phillip',
-	'placeHolder' : 'assets/images/q3.png',	
+	'correct' : "Terrance and Phillip",
+	'placeHolder' : 'assets/images/q3.png',
+	'answerInfo' : 'Terrance and Phillip'
 	}, {
 	'questionNumber' : 4,
-	'question' : 'Who is the school/s counselor, mmkay?',
-	'choices' : ['Mr. Garrison', 'Mr.Mackey', 'Mrs.Crabtree', 'Mrs.Choksondik'],
+	'question' : 'Who is the schools counselor, mmkay?',
+	'choices' : ['Mr.Mackey', 'Mr.Garrison', 'Mrs.Choksondik', 'Mrs.Crabtree'],
 	'correct' : 'Mr.Mackey',
-	'placeHolder' : 'assets/images/q4.png',	
+	'placeHolder' : 'assets/images/q4.png',
+	'answerInfo' : 'Mr.Mackey'
 	}, {
 	'questionNumber' : 5,
-	'question' : 'Who is the boy/s teacher?',
-	'choices' : ['Mr.Garrison', 'Mr.Mackey', 'Chef', 'Mr.Marsh'],
+	'question' : 'Who is the boys teacher?',
+	'choices' : ['Chef', 'Mr.Garrison', 'Mr.Mackey', 'Mr.Marsh'],
 	'correct' : 'Mr.Garrison',
-	'placeHolder' : 'assets/images/g5.png',
+	'placeHolder' : 'assets/images/q5.png',
+	'answerInfo' : 'Mr.Garrison'
 	}, {
 	'questionNumber' : 6,
-	'question' : 'What is Cartman/s first name?',
-	'choices' : ['Eric', 'Ben', 'Sean', 'Collin'],
+	'question' : "What is Cartmans first name?",
+	'choices' : ['Sean', 'Eric', 'Collin', 'Ben'],
 	'correct' : 'Eric',
-	'placeHolder' : 'assets/images/q6.png',	
+	'placeHolder' : 'assets/images/q6.png',
+	'answerInfo' : 'Eric' 
 	}, {
 	'questionNumber' : 7,
-	'question' : 'Butter/s real name is?'
-	'choices' : ['Leopold Stock', 'Leopold Scotch', 'Leonardo Da Vinci', 'Leopard Stink'],
+	'question' : "Butters real name is?",
+	'choices' : ['Leopold Stock', 'Leonardo Da Vinci', 'Leopold Scotch', 'Leopard Stink'],
 	'correct' : 'Leopold Scotch',
 	'placeHolder' : 'assets/images/q7.png',
+	'answerInfo' : 'Leopold Scotch'
 	}, {
 	'questionNumber' : 8,
 	'question' : 'Who is always nervous?',
-	'choices' : ['Tweek', 'Timmy', 'Jimmy', 'Clyde'],
+	'choices' : ['Timmy', 'Jimmy', 'Clyde', 'Tweek'],
 	'correct' : 'Tweek',
 	'placeHolder' : 'assets/images/q8.png',
+	'answerInfo' : 'Tweek'
 	}, {
 	'questionNumber' : 9,
-	'question' : 'Who is Stan/s girlfriend?',
+	'question' : 'Who is Stans girlfriend?',
 	'choices' : ['Wendy Testaburger', 'Wile E Coyote', 'Windy Testicles', 'Wilma Testmyburger'],
 	'correct' : 'Wendy Testaburger',
 	'placeHolder' : 'assets/images/q9.png',
+	'answerInfo' : 'Wendy Testaburger'
 	}, {
 	'questionNumber' : 10,
-	'question' : 'Who do the boy/s go to when they need answers?'
-	'choices' : ['Obama', 'Chef', 'Satan', 'Kyle/s dad'],
+	'question' : 'Who do the boys go to when they need answers?',
+	'choices' : ['Obama', 'Satan', 'Chef', 'Kyles dad'],
 	'correct' : 'Chef',
 	'placeHolder' : 'assets/images/q10.png',
+	'answerInfo' : 'Chef'
 	}
 ]
+
 
 //global variables
 
@@ -72,49 +85,50 @@ var total = right + wrong;
 var unanswered = 0;
 var percent = 0;
 var quesNum = 0;
-var audio1 = $("#clickSound") [0];
+var audio1 = $("#clickSound")[0];
 
 var timer = {
 	time : 11,
 	reset: function(){
 		timer.time = 11;
 	},
-	start: function() {
+	start: function(){
 		counter = setInterval(timer.count, 1000);
 	},
-	stop: function() {
+	stop: function(){
 		clearInterval(counter);
 	},
-	count: function() {
+	count: function(){
 		timer.time --;
-		var converted = timer.timeConverter(time.time);
+		var converted = timer.timeConverter(timer.time);
 		$('#timeShow').html(converted);
 		timer.check();
+
 	},
-	timeConverter: function(t) {
-		var minutes = Math.floor(t/60);
-		var seconds = t - (minutes * 60);
-		if (seconds < 10){
-			seconds = "0" + seconds;
-	}
-	if (minutes === 0){
-		minutes = "00";
-	} else if (minutes < 10){
-		minutes = "0" + minutes;
-	}
-	return minutes + ":" + seconds;
-	},
-	check: function(){
-		if (timer.time = 0) {
-			setTimeout(timesup, 500);
-			setTimeout(startQuiz, 4000);
-		}
-	}
+	timeConverter: function(t){
+	    var minutes = Math.floor(t/60);
+	    var seconds = t - (minutes * 60);
+	    if (seconds < 10){
+	      seconds = "0" + seconds;
+    }
+    if (minutes === 0){
+	      minutes = "00";
+    } else if (minutes < 10){
+	      minutes = "0" + minutes;
+    }
+    return minutes + ":" + seconds;
+  },
+  	check: function(){
+  	if (timer.time == 0) {
+  		setTimeout(timesUp, 500);
+		setTimeout(startQuiz, 4000);
+  	}
+  }
 }
 
 //functions
 //draw board
-function createBoard() {
+function createBoard(){
 	$('.container').empty();
 	$('#opening').removeClass().addClass('container game text-center');
 	$('.container').append('<div class="row"><div class="timerContainer"><div id="timeLeft">Time Left:</div><div id="timeShow">00:10</div></div>'); 
@@ -124,7 +138,7 @@ function createBoard() {
 };
 
 
-function resetGame() {
+function resetGame(){
 	right = 0;
 	wrong = 0;
 	percent = 0;
@@ -133,7 +147,7 @@ function resetGame() {
 }
 
 
-function timesup() {
+function timesUp(){
 	timer.stop();
 	$('.quizContainer').html('<div class="text-center"><img id="answerImg" src""></div>');
 	$('#answerImg').attr('src', quiz[quesNum].placeHolder);
@@ -141,6 +155,8 @@ function timesup() {
   	unanswered++;
   	quesNum++;
 }
+
+
 
 function youAreCorrect(){
 	timer.stop();
@@ -176,6 +192,7 @@ function quizEnd() {
 		resetGame();
 	});
 }
+
 
 function startQuiz(){
 
@@ -234,7 +251,5 @@ $('.start').click(function(){
 
 //audio stat playing
 $("#clickSound").get(0).play();
-
-});
 
 });
